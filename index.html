@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сайт за 1 день — одностраничник на коде</title>
+  <meta name="description" content="Сайт-одностраничник за 1 день. Код пишется под ваш бизнес без конструкторов. Цена 6500 ₽." />
+  <meta property="og:title" content="Сайт за 1 день" />
+  <meta property="og:description" content="Одностраничник, который продаёт. За 1 день готовое решение для вашего бизнеса." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    :root {
+      --bg: #050505;
+      --bg2: #0c0c0c;
+      --card: rgba(255,255,255,.055);
+      --card2: rgba(255,255,255,.09);
+      --text: #f7f7f2;
+      --muted: #aaa9a2;
+      --line: rgba(255,255,255,.12);
+      --gold: #d7a83f;
+      --gold2: #ffd66b;
+      --lime: #c8ff3d;
+      --shadow: 0 24px 90px rgba(0,0,0,.58);
+      --radius: 30px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% -10%, rgba(215,168,63,.25), transparent 30%),
+        radial-gradient(circle at 95% 5%, rgba(200,255,61,.12), transparent 28%),
+        linear-gradient(180deg, #030303, #0a0a0a 45%, #050505);
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1180px, calc(100% - 34px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(5,5,5,.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      font-size: 21px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #000;
+      border: 1px solid rgba(255,214,107,.55);
+      display: grid;
+      place-items: center;
+      color: var(--gold2);
+      font-weight: 950;
+      box-shadow: inset 0 0 18px rgba(255,214,107,.18), 0 0 18px rgba(215,168,63,.14);
+    }
+
+    .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 14px 23px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,214,107,.32);
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      color: #111;
+      font-weight: 900;
+      box-shadow: 0 18px 42px rgba(215,168,63,.18);
+      cursor: pointer;
+      transition: .22s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .btn.dark { background: rgba(255,255,255,.06); color: var(--text); box-shadow: none; border-color: var(--line); }
+    .btn.lime { background: var(--lime); border-color: transparent; color: #111; }
+
+    .hero { padding: 82px 0 48px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 34px; align-items: center; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--line);
+      color: var(--gold2);
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(44px, 7.4vw, 92px);
+      line-height: .91;
+      letter-spacing: -.075em;
+      max-width: 850px;
+    }
+
+    .hero-title-soft { color: var(--muted); }
+    .lead { max-width: 700px; font-size: 22px; color: var(--muted); margin: 0; }
+    .lead strong { color: #fff; }
+    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 30px; }
+
+    .hero-panel {
+      position: relative;
+      padding: 26px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.045));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel:before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at 78% 15%, rgba(255,214,107,.25), transparent 32%);
+      pointer-events: none;
+    }
+
+    .price { position: relative; font-size: 86px; font-weight: 950; letter-spacing: -.08em; margin: 8px 0; }
+    .price span { font-size: 26px; letter-spacing: 0; color: var(--muted); }
+    .mini { position: relative; color: var(--muted); font-size: 16px; }
+    .terms { position: relative; display: grid; gap: 12px; margin-top: 24px; }
+    .term { padding: 15px 16px; border-radius: 20px; background: rgba(0,0,0,.28); border: 1px solid var(--line); font-weight: 800; }
+
+    section { padding: 58px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
+    h2 { font-size: clamp(34px, 5vw, 58px); line-height: .98; letter-spacing: -.055em; margin: 0; }
+    .sub { max-width: 610px; color: var(--muted); font-size: 18px; margin: 0; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { min-height: 185px; padding: 23px; border-radius: 26px; border: 1px solid var(--line); background: var(--card); box-shadow: 0 18px 55px rgba(0,0,0,.2); }
+    .card h3 { font-size: 23px; margin: 0 0 10px; letter-spacing: -.02em; }
+    .card p { color: var(--muted); margin: 0; }
+    .num { width: 42px; height: 42px; border-radius: 15px; display: grid; place-items: center; background: var(--lime); color: #111; font-weight: 950; margin-bottom: 18px; }
+
+    .portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .shot {
+      min-height: 286px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15);
+      background: #151515;
+      position: relative;
+      box-shadow: 0 22px 60px rgba(0,0,0,.35);
+    }
+
+    .browser { height: 34px; display:flex; align-items:center; gap:6px; padding:0 13px; background: rgba(0,0,0,.34); border-bottom:1px solid rgba(255,255,255,.1); }
+    .dot { width: 8px; height: 8px; border-radius:50%; background: rgba(255,255,255,.5); }
+    .shot-body { padding: 18px; position: relative; min-height: 252px; }
+    .shot-title { font-size: 25px; line-height: .98; font-weight: 950; letter-spacing: -.05em; margin-bottom: 8px; }
+    .shot-text { font-size: 13px; color: rgba(255,255,255,.76); max-width: 190px; }
+    .shot-btn { position: absolute; left: 18px; bottom: 18px; padding: 10px 13px; border-radius: 999px; background: #fff; color:#111; font-weight: 900; font-size: 12px; }
+    .shape { position: absolute; border-radius: 999px; filter: blur(.1px); opacity: .88; }
+
+    .p1 { background: linear-gradient(145deg, #201018, #4c2338); } .p1 .shape.a { width: 92px; height: 128px; right: 14px; bottom: 52px; background: linear-gradient(#f2c4aa,#bb6d83); border-radius: 60px 60px 22px 22px; }
+    .p1 .shape.b { width: 72px; height: 72px; right: 24px; top: 70px; background: #2d171c; }
+    .p2 { background: linear-gradient(145deg, #fbefe3, #bf8d6d); color:#211; } .p2 .shot-text { color: rgba(30,20,15,.68); } .p2 .shape.a { width: 110px; height: 110px; right: -20px; bottom: 44px; background:#2c1a14; } .p2 .shape.b { width: 88px; height: 88px; right: 38px; bottom: 72px; background:#eac7ad; }
+    .p3 { background: linear-gradient(145deg, #061d34, #0c6a80); } .p3 .shape.a { width: 118px; height: 76px; right: 16px; bottom: 78px; background: rgba(255,255,255,.12); border-radius: 18px; } .p3 .shape.b { width: 58px; height: 58px; right: 46px; bottom: 98px; background:#c8ff3d; }
+    .p4 { background: linear-gradient(145deg, #1b160f, #e28b22); } .p4 .shape.a { width: 126px; height: 94px; right: 8px; bottom: 70px; background:#333; border-radius: 12px; } .p4 .shape.b { width: 118px; height: 12px; right: 12px; bottom: 152px; background:#ffd66b; border-radius:999px; }
+    .p5 { background: linear-gradient(145deg, #0e2817, #69b45c); } .p5 .shape.a { width: 106px; height: 106px; right: 18px; bottom: 78px; background:#fff3d7; } .p5 .shape.b { width: 68px; height: 34px; right: 38px; bottom: 116px; background:#e64b36; }
+    .p6 { background: linear-gradient(145deg, #16111e, #5d35ff); } .p6 .shape.a { width: 120px; height: 86px; right: 14px; bottom: 82px; background:#fff; border-radius:20px; } .p6 .shape.b { width: 78px; height: 8px; right: 35px; bottom: 136px; background:#c8ff3d; }
+    .p7 { background: linear-gradient(145deg, #0e0e0e, #6c6b63); } .p7 .shape.a { width: 92px; height: 122px; right: 18px; bottom: 54px; background:#d7d7d7; border-radius:44px 44px 18px 18px; } .p7 .shape.b { width: 54px; height: 38px; right: 50px; bottom: 114px; background:#111; border-radius:10px; }
+    .p8 { background: linear-gradient(145deg, #190518, #be2f74); } .p8 .shape.a { width: 116px; height: 116px; right: -8px; bottom: 70px; background: rgba(255,214,107,.85); } .p8 .shape.b { width: 90px; height: 90px; right: 36px; bottom: 104px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2); }
+
+    .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .pay-box { border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(135deg, rgba(255,214,107,.12), rgba(255,255,255,.045)); padding: 26px; display:grid; grid-template-columns: 1fr auto; gap: 22px; align-items:center; box-shadow: var(--shadow); }
+
+    .contact { display:grid; grid-template-columns: .9fr 1.1fr; gap: 22px; align-items:start; }
+    form { padding: 25px; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(255,255,255,.075); box-shadow: var(--shadow); }
+    label { display:block; font-weight:850; margin: 0 0 8px; }
+    input, textarea, select {
+      width:100%;
+      padding: 15px 16px;
+      border-radius: 17px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.34);
+      color: #fff;
+      outline: none;
+      font: inherit;
+      margin-bottom: 14px;
+    }
+    textarea { min-height: 118px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.42); }
+    .note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+    .faq { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    details { border:1px solid var(--line); background: var(--card); border-radius:24px; padding:18px 20px; }
+    summary { cursor:pointer; font-weight:900; font-size:18px; }
+    details p { color: var(--muted); margin-bottom: 0; }
+
+    footer { padding: 34px 0; border-top:1px solid var(--line); color: var(--muted); }
+
+    @media (max-width: 960px) {
+      .hero-grid, .contact, .pay-box { grid-template-columns:1fr; }
+      .cards { grid-template-columns:1fr 1fr; }
+      .portfolio-grid { grid-template-columns:1fr 1fr; }
+      .process { grid-template-columns:1fr 1fr; }
+      .nav-links { display:none; }
+    }
+
+    @media (max-width: 570px) {
+      .cards, .portfolio-grid, .process, .faq { grid-template-columns:1fr; }
+      .price { font-size: 62px; }
+      .hero { padding-top: 50px; }
+      .btn { width:100%; }
+      .section-head { display:block; }
+      .section-head .sub { margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Сайт за 1 день">
+        <span class="brand-mark">1</span>
+        <span>Сайт за 1 день</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#offer">Что входит</a>
+        <a href="#portfolio">Примеры</a>
+        <a href="#price">Цена</a>
+        <a href="#contact">Заявка</a>
+      </nav>
+      <a class="btn dark" href="tel:+79883542237">+7 988 354 2237</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Быстрый ответ и бесплатная консультация</div>
+          <h1>Сайт-одностраничник, который продаёт. <span class="hero-title-soft">За 1 день.</span></h1>
+          <p class="lead">Готовое решение для вашего бизнеса: без Тильды, без шаблонного болота, без лишних подписок. <strong>Код пишется под вас</strong> и передаётся полностью.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#contact">Оставить заявку</a>
+            <a class="btn dark" href="#portfolio">Смотреть примеры</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" id="price">
+          <div class="eyebrow">Фиксированная цена</div>
+          <div class="price">6500 <span>₽</span></div>
+          <p class="mini">Срок — 1 день после оплаты, заполненного ТЗ и передачи материалов.</p>
+          <div class="terms">
+            <div class="term">Только одностраничники</div>
+            <div class="term">Чистый HTML/CSS/JS-код</div>
+            <div class="term">Форма обратной связи через Web3Forms</div>
+            <div class="term">Размещение на бесплатной платформе</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offer">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Что входит</h2>
+          <p class="sub">Не сайт «для галочки», а собранная продающая страница: быстро, понятно, аккуратно и без технической каши.</p>
+        </div>
+        <div class="cards">
+          <div class="card"><div class="num">1</div><h3>Продающая структура</h3><p>Первый экран, оффер, выгоды, примеры, условия, заявка и контакты.</p></div>
+          <div class="card"><div class="num">2</div><h3>Код под вас</h3><p>Без конструкторов, тяжёлых шаблонов и визуального мусора.</p></div>
+          <div class="card"><div class="num">3</div><h3>Форма заявки</h3><p>Подготовлена под Web3Forms. Ключ можно вставить после получения домена.</p></div>
+          <div class="card"><div class="num">4</div><h3>Обучение</h3><p>Покажу, как менять телефон, тексты, ссылки и небольшие блоки.</p></div>
+          <div class="card"><div class="num">5</div><h3>Передача файлов</h3><p>Клиент получает весь код сайта в полном объёме.</p></div>
+          <div class="card"><div class="num">6</div><h3>3 правки включены</h3><p>Остальные доработки: блоки, формы, сложное размещение — обсуждаются отдельно.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>8 примеров стиля</h2>
+          <p class="sub">Вымышленные визуалы одностраничников для разных ниш. Это демонстрация направления, а не готовые шаблоны.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="shot p1"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Психолог</div><div class="shot-text">Мягкий личный сайт с записью на консультацию.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Записаться</div></div></article>
+          <article class="shot p2"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Салон красоты</div><div class="shot-text">Прайс, услуги, атмосфера и быстрая запись.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Хочу запись</div></div></article>
+          <article class="shot p3"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Юрист</div><div class="shot-text">Строгий сайт для доверия и первой заявки.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Получить помощь</div></div></article>
+          <article class="shot p4"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Ремонт</div><div class="shot-text">Смета, сроки, примеры работ и расчёт.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Рассчитать</div></div></article>
+          <article class="shot p5"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Доставка</div><div class="shot-text">Меню, условия, зона доставки и заказ.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Заказать</div></div></article>
+          <article class="shot p6"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Онлайн обучение</div><div class="shot-text">Программа, результат, тариф и набор.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">На обучение</div></div></article>
+          <article class="shot p7"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Фотограф</div><div class="shot-text">Портфолио, пакеты съёмки и бронь даты.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Забронировать</div></div></article>
+          <article class="shot p8"><div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="shot-body"><div class="shot-title">Коуч</div><div class="shot-text">Личная подача, формат работы и заявка.</div><span class="shape a"></span><span class="shape b"></span><div class="shot-btn">Начать</div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head"><h2>Как работаем</h2><p class="sub">Сайт за день возможен только при нормальном старте: заполненное ТЗ, материалы и оплата до начала работы.</p></div>
+        <div class="process">
+          <div class="card"><div class="num">1</div><h3>Консультация</h3><p>Разбираем нишу, задачу, стиль и нужные блоки.</p></div>
+          <div class="card"><div class="num">2</div><h3>ТЗ и оплата</h3><p>Заказчик передаёт материалы и оплачивает работу.</p></div>
+          <div class="card"><div class="num">3</div><h3>Сборка</h3><p>Делаю страницу, адаптив и форму заявки.</p></div>
+          <div class="card"><div class="num">4</div><h3>Передача</h3><p>Передаю код и показываю, как менять простые данные.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="pay-box">
+          <div>
+            <h2>Оплату можно подключить позже</h2>
+            <p class="sub">В сайт можно добавить кнопку оплаты через ЮKassa, Robokassa или другой платёжный сервис. Сейчас оставляем чистую заявку, чтобы быстрее запустить страницу.</p>
+          </div>
+          <a class="btn dark" href="#contact">Сначала заявка</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact">
+        <div>
+          <h2>Нужен сайт без долгих созвонов?</h2>
+          <p class="sub">Оставьте заявку. Я отвечу, уточню задачу и пришлю форму ТЗ для старта.</p>
+          <p style="font-size:25px;font-weight:950;margin-top:26px;"><a href="tel:+79883542237">+7 988 354 2237</a></p>
+        </div>
+
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="PASTE_WEB3FORMS_KEY_HERE" />
+          <input type="hidden" name="subject" value="Новая заявка с сайта: Сайт за 1 день" />
+          <input type="hidden" name="from_name" value="Сайт за 1 день" />
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+
+          <label for="name">Имя</label>
+          <input id="name" name="name" type="text" placeholder="Как к вам обращаться" required />
+
+          <label for="phone">Телефон</label>
+          <input id="phone" name="phone" type="tel" placeholder="Ваш телефон" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Куда ответить" required />
+
+          <label for="type">Что нужно сделать</label>
+          <select id="type" name="type">
+            <option>Сайт для услуги</option>
+            <option>Сайт для эксперта</option>
+            <option>Сайт для локального бизнеса</option>
+            <option>Другое</option>
+          </select>
+
+          <label for="message">Коротко о задаче</label>
+          <textarea id="message" name="message" placeholder="Ниша, услуга, желаемый стиль, сроки"></textarea>
+
+          <button class="btn" type="submit">Отправить заявку</button>
+          <div class="note">После получения ключа Web3Forms нужно заменить PASTE_WEB3FORMS_KEY_HERE на ваш реальный access key.</div>
+        </form>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head"><h2>Вопросы</h2><p class="sub">Коротко о важных условиях.</p></div>
+        <div class="faq">
+          <details><summary>Что нужно от заказчика?</summary><p>Заполненное ТЗ, фото, тексты, ссылки, материалы для сайта и полная оплата до начала работ.</p></details>
+          <details><summary>Сколько правок входит?</summary><p>В стоимость входят 3 правки. Добавление новых блоков, форм, сложного функционала и нестандартное размещение обсуждаются отдельно.</p></details>
+          <details><summary>Где будет размещён сайт?</summary><p>На бесплатной платформе: Cloudflare Pages, GitHub Pages, Netlify или аналогичной площадке для статических сайтов.</p></details>
+          <details><summary>Можно ли менять сайт самостоятельно?</summary><p>Да, небольшие изменения можно вносить самостоятельно: телефон, текст, ссылки, простые блоки. Для этого даётся базовое объяснение.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© Сайт за 1 день. Одностраничники на чистом коде. Цена 6500 ₽. Телефон: <a href="tel:+79883542237">+7 988 354 2237</a></div>
+  </footer>
+</body>
+</html>
